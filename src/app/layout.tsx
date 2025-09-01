@@ -32,6 +32,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full w-full">
+      <head>
+        {/* Allow zoom for accessibility, prevent horizontal overflow */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body
         className={`${cormorantGaramond.variable} ${libreBaskerville.variable} antialiased min-h-screen w-full bg-white text-[#222] overflow-x-hidden`}
         style={{ WebkitOverflowScrolling: "touch" }}
