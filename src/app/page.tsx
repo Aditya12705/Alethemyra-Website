@@ -93,10 +93,10 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F4F4F2] text-[#7C6A4E]">
+  <div className="min-h-screen flex flex-col bg-[#F4F4F2] text-[#7C6A4E] w-full max-w-full overflow-x-hidden">
       {/* Header */}
       <header className="w-full bg-[#F4F4F2] border-b border-[#7C6A4E] shadow-md sticky top-0 z-50 transition-all duration-500">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-6 py-4 relative overflow-hidden">
+  <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-4 md:px-6 py-4 relative overflow-hidden">
           {/* Animated Gradient Background */}
           <div className="absolute inset-0 z-0 pointer-events-none animate-gradient-x bg-gradient-to-r from-[#F4F4F2]/30 via-[#7C6A4E]/30 to-[#F4F4F2]/30 blur-2xl opacity-60" />
           {/* Logo with scale/rotate on hover */}
