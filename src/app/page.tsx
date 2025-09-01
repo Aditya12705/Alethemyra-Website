@@ -5,7 +5,58 @@ import Image from "next/image";
 import Logo from '../../public/logo.jpg';
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { TypewriterEffect } from "@/components/ui/typewriter-effect";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+// MobileNav component for mobile hamburger menu navigation
+function MobileNav() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button
+        className="md:hidden flex flex-col justify-center items-center w-10 h-10 z-30 focus:outline-none"
+        aria-label="Open menu"
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span className={`block h-0.5 w-6 bg-[#7C6A4E] rounded transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`}></span>
+        <span className={`block h-0.5 w-6 bg-[#7C6A4E] rounded my-1 transition-all duration-300 ${open ? 'opacity-0' : ''}`}></span>
+        <span className={`block h-0.5 w-6 bg-[#7C6A4E] rounded transition-all duration-300 ${open ? '-rotate-45 -translate-y-2' : ''}`}></span>
+      </button>
+      {/* Overlay */}
+      <div
+        className={`fixed inset-0 bg-black/40 z-20 transition-opacity duration-300 ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        onClick={() => setOpen(false)}
+      />
+      {/* Drawer */}
+      <nav
+        className={`fixed top-0 right-0 h-full w-64 bg-[#F4F4F2] z-30 shadow-lg transform transition-transform duration-300 ${open ? 'translate-x-0' : 'translate-x-full'}`}
+        style={{ borderLeft: '1px solid #7C6A4E' }}
+      >
+        <div className="flex flex-col gap-6 p-8 pt-20 text-[#7C6A4E] font-semibold text-lg">
+          {[
+            { label: "Benefits", href: "#features" },
+            { label: "Features", href: "#benefits" },
+            { label: "About Us", href: "#about" },
+            { label: "Impact", href: "#impact" },
+            { label: "Demo", href: "#demo" },
+          ].map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="hover:text-[#C2A66C] transition"
+              onClick={() => setOpen(false)}
+            >
+              {item.label}
+            </a>
+          ))}
+          <SignUpButton mode="modal">
+            <button className="mt-8 px-4 py-2 rounded bg-[#7C6A4E] text-[#F4F4F2] font-semibold shadow hover:bg-[#C2A66C] hover:text-[#F4F4F2] transition">
+              Join Waitlist
+            </button>
+          </SignUpButton>
+        </div>
+      </nav>
+    </>
+  );
+}
 import { CardStack } from "@/components/ui/card-stack";
 import { EvervaultCard } from "@/components/ui/evervault-card";
 import { TransformationCards } from "@/components/ui/card-spotlight";
@@ -93,10 +144,10 @@ export default function Home() {
   ];
 
   return (
-  <div className="min-h-screen flex flex-col bg-[#F4F4F2] text-[#7C6A4E] w-full max-w-full overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-[#F4F4F2] text-[#7C6A4E] w-full max-w-full overflow-x-hidden">
       {/* Header */}
       <header className="w-full bg-[#F4F4F2] border-b border-[#7C6A4E] shadow-md sticky top-0 z-50 transition-all duration-500">
-  <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-4 md:px-6 py-4 relative overflow-hidden">
+        <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-4 md:px-6 py-4 relative overflow-hidden">
           {/* Animated Gradient Background */}
           <div className="absolute inset-0 z-0 pointer-events-none animate-gradient-x bg-gradient-to-r from-[#F4F4F2]/30 via-[#7C6A4E]/30 to-[#F4F4F2]/30 blur-2xl opacity-60" />
           {/* Logo with scale/rotate on hover */}
@@ -143,9 +194,7 @@ export default function Home() {
             </SignUpButton>
           </div>
           {/* Mobile Nav */}
-          <div className="md:hidden z-20">
-            {/* You can use a hamburger menu here if you want */}
-          </div>
+          <MobileNav />
         </div>
       </header>
 
